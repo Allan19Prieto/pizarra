@@ -287,3 +287,53 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+.history-panel {
+  margin-top: 28px;
+}
+
+.history-selector {
+  max-width: 380px;
+  margin-top: 24px;
+}
+
+.history-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin-top: 28px;
+}
+
+.price-unit {
+  color: #91a2b9;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.history-period,
+.chart-note {
+  color: #91a2b9;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.history-chart {
+  margin-top: 20px;
+}
+
+.history-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.chart-note {
+  margin-bottom: 0;
+}
+
+@media (max-width: 720px) {
+  .history-summary {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

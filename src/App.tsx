@@ -1,5 +1,6 @@
 import PricesTable from "./components/PricesTable";
 import { demoPrices } from "./data/demoPrices";
+import PriceHistory from "./components/PriceHistory";
 
 function App() {
   return (
@@ -57,6 +58,8 @@ function App() {
       </section>
 
       <PricesTable records={demoPrices} />
+
+      <PriceHistory records={demoPrices} />
 
       <footer>
         RP · Rubén Prieto — Fuente prevista: boletines de PIMA/CENADA.
