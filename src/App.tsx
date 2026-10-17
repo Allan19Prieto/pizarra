@@ -1,3 +1,6 @@
+import PricesTable from "./components/PricesTable";
+import { demoPrices } from "./data/demoPrices";
+
 function App() {
   return (
     <main className="dashboard">
@@ -53,18 +56,7 @@ function App() {
         </article>
       </section>
 
-      <section className="panel">
-        <h2>Precios de productos</h2>
-
-        <p>
-          Aquí construiremos la tabla con búsqueda, filtros y
-          acceso al histórico de cada producto.
-        </p>
-
-        <div className="empty-state">
-          Aún no hay boletines cargados en esta versión.
-        </div>
-      </section>
+      <PricesTable records={demoPrices} />
 
       <footer>
         RP · Rubén Prieto — Fuente prevista: boletines de PIMA/CENADA.
