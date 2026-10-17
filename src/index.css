@@ -1,0 +1,171 @@
+:root {
+  font-family: Inter, system-ui, sans-serif;
+  color: #e8edf5;
+  background: #0b1220;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+.dashboard {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px 0;
+  border-bottom: 1px solid #233047;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-logo {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: #71e2b0;
+  color: #10251c;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.brand-name {
+  margin: 0;
+  font-weight: 700;
+}
+
+.brand-description {
+  margin: 4px 0 0;
+  color: #9aabc0;
+  font-size: 13px;
+}
+
+.status {
+  padding: 8px 12px;
+  border: 1px solid #33435b;
+  border-radius: 999px;
+  color: #b8c5d6;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.intro {
+  padding: 60px 0 32px;
+}
+
+.eyebrow {
+  color: #71e2b0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+h1 {
+  max-width: 720px;
+  margin: 16px 0;
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.intro-description {
+  max-width: 640px;
+  color: #a7b5c8;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.card,
+.panel {
+  border: 1px solid #233047;
+  border-radius: 18px;
+  background: #111c2e;
+  padding: 24px;
+}
+
+.card-label {
+  margin: 0;
+  color: #a7b5c8;
+  font-size: 14px;
+}
+
+.card-value {
+  margin: 18px 0 10px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.card-description {
+  margin: 0;
+  color: #91a2b9;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.panel h2 {
+  margin-top: 0;
+  font-size: 21px;
+}
+
+.panel > p {
+  color: #a7b5c8;
+  line-height: 1.6;
+}
+
+.empty-state {
+  margin-top: 24px;
+  padding: 48px 20px;
+  border: 1px dashed #34445c;
+  border-radius: 12px;
+  text-align: center;
+  color: #91a2b9;
+}
+
+footer {
+  padding: 32px 0;
+  color: #8193ab;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .summary {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-wrap: wrap;
+  }
+
+  .intro {
+    padding-top: 36px;
+  }
+}
