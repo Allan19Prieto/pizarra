@@ -1,0 +1,56 @@
+[
+  {
+    "date": "2026-10-15",
+    "product": "Tomate",
+    "unit": "kg",
+    "min": 700,
+    "max": 1100,
+    "mode": 900,
+    "average": 920
+  },
+  {
+    "date": "2026-10-15",
+    "product": "Papa",
+    "unit": "kg",
+    "min": 600,
+    "max": 850,
+    "mode": 750,
+    "average": 730
+  },
+  {
+    "date": "2026-10-15",
+    "product": "Culantro coyote",
+    "unit": "rollo",
+    "min": 150,
+    "max": 250,
+    "mode": 200,
+    "average": 195
+  },
+  {
+    "date": "2026-10-16",
+    "product": "Tomate",
+    "unit": "kg",
+    "min": 800,
+    "max": 1200,
+    "mode": 1050,
+    "average": 980
+  },
+  {
+    "date": "2026-10-16",
+    "product": "Papa",
+    "unit": "kg",
+    "min": 650,
+    "max": 900,
+    "mode": 800,
+    "average": 780
+  },
+  {
+    "date": "2026-10-16",
+    "product": "Culantro coyote",
+    "unit": "rollo",
+    "min": 175,
+    "max": 275,
+    "mode": 225,
+    "average": 220
+  }
+]

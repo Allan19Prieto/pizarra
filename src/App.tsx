@@ -1,26 +1,72 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PricesTable from "./components/PricesTable";
 import PriceHistory from "./components/PriceHistory";
-import { demoPrices } from "./data/demoPrices";
+import type { PriceRecord } from "./types/market";
 import { productKey } from "./types/market";
+import { getPrices } from "./services/marketService";
 
-const money = new Intl.NumberFormat("es-CR", {
+const currencyFormatter = new Intl.NumberFormat("es-CR", {
   style: "currency",
   currency: "CRC",
   maximumFractionDigits: 2,
 });
 
-function formatDate(date: string) {
-  const [year, month, day] = date.split("-");
-  return `${day}/${month}/${year}`;
+const percentFormatter = new Intl.NumberFormat("es-CR", {
+  style: "percent",
+  maximumFractionDigits: 1,
+  signDisplay: "exceptZero",
+});
+
+function formatDate(date: string): string {
+  return new Intl.DateTimeFormat("es-CR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${date}T00:00:00Z`));
 }
 
-function App() {
-  const [selectedProductKey, setSelectedProductKey] = useState(
-    demoPrices.length > 0 ? productKey(demoPrices[0]) : "",
-  );
+export default function App() {
+  const [records, setRecords] = useState<PriceRecord[]>([]);
+  const [selectedProductKey, setSelectedProductKey] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const history = demoPrices
+  useEffect(() => {
+    let active = true;
+
+    async function loadPrices() {
+      try {
+        const prices = await getPrices();
+
+        if (!active) return;
+
+        setRecords(prices);
+        setSelectedProductKey(
+          prices.length > 0 ? productKey(prices[0]) : ""
+        );
+      } catch (cause) {
+        if (!active) return;
+
+        console.error("Error al cargar los precios:", cause);
+        setError(
+          "No pudimos cargar los precios. Intenta nuevamente."
+        );
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
+      }
+    }
+
+    void loadPrices();
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const history = records
     .filter((record) => productKey(record) === selectedProductKey)
     .sort((a, b) => a.date.localeCompare(b.date));
 
@@ -28,128 +74,149 @@ function App() {
   const latest = history[history.length - 1];
 
   const variation =
-    first && latest && history.length >= 2 && first.mode > 0
-      ? ((latest.mode - first.mode) / first.mode) * 100
+    history.length >= 2 && first && latest && first.mode > 0
+      ? (latest.mode - first.mode) / first.mode
       : null;
 
-  const variationText =
-    variation === null
-      ? "—"
-      : `${variation > 0 ? "+" : ""}${variation.toLocaleString("es-CR", {
-          maximumFractionDigits: 1,
-        })}%`;
-
   return (
-    <main className="dashboard">
+    <div className="app">
       <header className="header">
         <div className="brand">
-          <span className="brand-logo">RP</span>
+          <span className="brand-logo" aria-hidden="true">
+            RP
+          </span>
 
           <div>
             <p className="brand-name">Rubén Prieto</p>
             <p className="brand-description">
-              Inteligencia de precios agrícolas
+              Precios y estadísticas CENADA
             </p>
           </div>
         </div>
 
-        <span className="status">Demostración</span>
+        <span className="status-badge">Demostración</span>
       </header>
 
-      <section className="intro">
-        <p className="eyebrow">MERCADO CENADA</p>
+      <main className="main">
+        <section className="intro" aria-labelledby="page-title">
+          <p className="eyebrow">Información de mercado</p>
 
-        <h1>Entendé cómo cambian los precios.</h1>
+          <h1 id="page-title">
+            Consulta precios. Comprende sus cambios.
+          </h1>
 
-        <p className="intro-description">
-          Explorá precios por producto y unidad, y compará su evolución
-          entre las fechas disponibles.
-        </p>
+          <p>
+            Explora los precios por producto y unidad, y compara
+            su evolución en el tiempo.
+          </p>
 
-        <p className="demo-notice">
-          Esta versión utiliza datos ficticios de prueba. Todavía no está
-          conectada a los boletines oficiales.
-        </p>
-      </section>
+          <p className="demo-notice">
+            <strong>Datos de demostración:</strong> los precios
+            mostrados son ficticios. Todavía no están conectados
+            con los boletines oficiales de PIMA/CENADA.
+          </p>
+        </section>
 
-      <section
-        className="selection-heading"
-        aria-label="Producto seleccionado"
-      >
-        <h2>
-          {latest
-            ? `${latest.product} · ${latest.unit}`
-            : "Sin producto seleccionado"}
-        </h2>
+        {loading ? (
+          <section className="panel">
+            <p role="status">Cargando precios…</p>
+          </section>
+        ) : error ? (
+          <section className="panel">
+            <p role="alert">{error}</p>
+          </section>
+        ) : records.length === 0 ? (
+          <section className="panel">
+            <p>No hay precios disponibles.</p>
+          </section>
+        ) : (
+          <>
+            {latest && (
+              <section aria-labelledby="selection-title">
+                <div className="selection-heading">
+                  <h2 id="selection-title">
+                    {latest.product} · {latest.unit}
+                  </h2>
 
+                  <p>
+                    Las tarjetas y el gráfico muestran el historial
+                    completo del producto seleccionado. El filtro
+                    de fecha solo modifica la tabla.
+                  </p>
+                </div>
+
+                <div className="stats-grid">
+                  <article className="stat-card">
+                    <h3>Última moda registrada</h3>
+
+                    <p className="stat-value">
+                      {currencyFormatter.format(latest.mode)}
+                    </p>
+
+                    <p className="stat-description">
+                      Por {latest.unit} · {formatDate(latest.date)}
+                    </p>
+                  </article>
+
+                  <article className="stat-card">
+                    <h3>Rango de precios</h3>
+
+                    <p className="stat-value range-value">
+                      {currencyFormatter.format(latest.min)}
+                      {" – "}
+                      {currencyFormatter.format(latest.max)}
+                    </p>
+
+                    <p className="stat-description">
+                      Mínimo y máximo por {latest.unit}
+                      {" · "}
+                      {formatDate(latest.date)}
+                    </p>
+                  </article>
+
+                  <article className="stat-card">
+                    <h3>Variación de la moda</h3>
+
+                    <p className="stat-value">
+                      {variation === null
+                        ? "Sin comparación"
+                        : percentFormatter.format(variation)}
+                    </p>
+
+                    <p className="stat-description">
+                      {variation !== null && first
+                        ? `${formatDate(first.date)} al ${formatDate(
+                            latest.date
+                          )}`
+                        : "Se necesitan dos fechas y una moda inicial mayor que cero."}
+                    </p>
+                  </article>
+                </div>
+              </section>
+            )}
+
+            <PricesTable
+              records={records}
+              selectedProductKey={selectedProductKey}
+              onSelectProduct={setSelectedProductKey}
+            />
+
+            <PriceHistory
+              records={records}
+              selectedProductKey={selectedProductKey}
+              onSelectProduct={setSelectedProductKey}
+            />
+          </>
+        )}
+      </main>
+
+      <footer className="footer">
+        <p>RP · Rubén Prieto</p>
         <p>
-          Las tarjetas y el gráfico muestran el histórico completo del
-          producto. El filtro de fecha afecta únicamente a la tabla.
+          Versión de demostración. Fuente oficial prevista:
+          boletines de PIMA/CENADA.
         </p>
-      </section>
-
-      <section className="summary" aria-label="Indicadores del producto">
-        <article className="card">
-          <p className="card-label">Última moda de la muestra</p>
-
-          <p className="card-value">
-            {latest ? money.format(latest.mode) : "—"}
-          </p>
-
-          <p className="card-description">
-            {latest
-              ? `Por ${latest.unit} · ${formatDate(latest.date)}`
-              : "Sin observaciones disponibles."}
-          </p>
-        </article>
-
-        <article className="card">
-          <p className="card-label">Rango de la última observación</p>
-
-          <p className="card-value range-value">
-            {latest
-              ? `${money.format(latest.min)} – ${money.format(latest.max)}`
-              : "—"}
-          </p>
-
-          <p className="card-description">
-            {latest
-              ? `Mínimo y máximo por ${latest.unit} · ${formatDate(latest.date)}`
-              : "Sin observaciones disponibles."}
-          </p>
-        </article>
-
-        <article className="card">
-          <p className="card-label">Variación de la moda</p>
-
-          <p className="card-value">{variationText}</p>
-
-          <p className="card-description">
-            {variation !== null && first && latest
-              ? `${formatDate(first.date)} a ${formatDate(latest.date)}`
-              : "Se requieren dos fechas y un precio inicial mayor que cero."}
-          </p>
-        </article>
-      </section>
-
-      <PricesTable
-        records={demoPrices}
-        selectedProductKey={selectedProductKey}
-        onSelectProduct={setSelectedProductKey}
-      />
-
-      <PriceHistory
-        records={demoPrices}
-        selectedProductKey={selectedProductKey}
-        onSelectProduct={setSelectedProductKey}
-      />
-
-      <footer>
-        RP · Rubén Prieto — Datos de demostración. Fuente prevista:
-        boletines de PIMA/CENADA.
       </footer>
-    </main>
+    </div>
   );
 }
-
-export default App;

@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import type { PriceRecord } from "../types/market";
 import { productKey } from "../types/market";
 
