@@ -1,8 +1,11 @@
 import { useState } from "react";
 import type { PriceRecord } from "../types/market";
+import { productKey } from "../types/market";
 
 type PricesTableProps = {
   records: PriceRecord[];
+  selectedProductKey: string;
+  onSelectProduct: (key: string) => void;
 };
 
 const currencyFormatter = new Intl.NumberFormat("es-CR", {
@@ -25,7 +28,11 @@ function normalizeText(value: string) {
     .trim();
 }
 
-export default function PricesTable({ records }: PricesTableProps) {
+export default function PricesTable({
+  records,
+  selectedProductKey,
+  onSelectProduct,
+}: PricesTableProps) {
   const dates = [...new Set(records.map((record) => record.date))]
     .sort()
     .reverse();
@@ -128,9 +135,23 @@ export default function PricesTable({ records }: PricesTableProps) {
                     record.date,
                     record.product,
                     record.unit,
-                  ])}
+                ])}
+                className={
+                    productKey(record) === selectedProductKey
+                    ? "selected-row"
+                    : undefined
+                }
                 >
-                  <th scope="row">{record.product}</th>
+                  <td>
+                    <button
+                      type="button"
+                      className="product-button"
+                      aria-pressed={productKey(record) === selectedProductKey}
+                      onClick={() => onSelectProduct(productKey(record))}
+                    >
+                      {record.product}
+                    </button>
+                  </td>
                   <td>{record.unit}</td>
                   <td className="numeric">
                     {currencyFormatter.format(record.min)}

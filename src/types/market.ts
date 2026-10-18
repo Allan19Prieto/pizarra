@@ -7,3 +7,7 @@ export type PriceRecord = {
   mode: number;
   average: number;
 };
+
+export function productKey(record: PriceRecord): string {
+  return JSON.stringify([record.product, record.unit]);
+}

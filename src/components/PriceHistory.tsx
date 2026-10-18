@@ -1,8 +1,12 @@
+
 import { useState } from "react";
 import type { PriceRecord } from "../types/market";
+import { productKey } from "../types/market";
 
 type PriceHistoryProps = {
   records: PriceRecord[];
+  selectedProductKey: string;
+  onSelectProduct: (key: string) => void;
 };
 
 const money = new Intl.NumberFormat("es-CR", {
@@ -10,10 +14,6 @@ const money = new Intl.NumberFormat("es-CR", {
   currency: "CRC",
   maximumFractionDigits: 0,
 });
-
-function productKey(record: PriceRecord) {
-  return JSON.stringify([record.product, record.unit]);
-}
 
 function dateLabel(date: string) {
   const [year, month, day] = date.split("-");
@@ -26,7 +26,11 @@ function dateValue(date: string) {
   return Date.parse(`${date}T00:00:00Z`);
 }
 
-export default function PriceHistory({ records }: PriceHistoryProps) {
+export default function PriceHistory({
+  records,
+  selectedProductKey,
+  onSelectProduct,
+}: PriceHistoryProps) {
   const products = [
     ...new Map(
       records.map((record) => [
@@ -40,11 +44,9 @@ export default function PriceHistory({ records }: PriceHistoryProps) {
     ).values(),
   ].sort((a, b) => a.name.localeCompare(b.name, "es"));
 
-  const [selectedKey, setSelectedKey] = useState("");
-
-  const activeProduct =
-    products.find((product) => product.key === selectedKey) ??
-    products[0];
+const activeProduct =
+  products.find((product) => product.key === selectedProductKey) ??
+  products[0];
 
   const history = activeProduct
     ? records
@@ -130,7 +132,7 @@ export default function PriceHistory({ records }: PriceHistoryProps) {
         <select
           id="history-product"
           value={activeProduct.key}
-          onChange={(event) => setSelectedKey(event.target.value)}
+          onChange={(event) => onSelectProduct(event.target.value)}
         >
           {products.map((product) => (
             <option key={product.key} value={product.key}>
