@@ -39,9 +39,8 @@ function isPriceRecord(value: unknown): value is PriceRecord {
 }
 
 export async function getPrices(): Promise<PriceRecord[]> {
-  const response = await fetch(
-    `${import.meta.env.BASE_URL}data/prices.json`
-  );
+  const url = "/api/prices";
+  const response = await fetch(url);
 
   if (!response.ok) {
     throw new Error(
@@ -49,10 +48,26 @@ export async function getPrices(): Promise<PriceRecord[]> {
     );
   }
 
-  const data: unknown = await response.json();
+  // Leemos la respuesta como texto para revisar su contenido.
+  const text = await response.text();
+
+  if (text.trimStart().startsWith("<")) {
+    throw new Error(
+      "La API devolvió HTML. Revisa que el servidor esté encendido y que el proxy de Vite esté configurado."
+    );
+  }
+
+  // Convertimos el texto a JSON.
+  let data: unknown;
+
+  try {
+    data = JSON.parse(text);
+  } catch {
+    throw new Error("La API no devolvió un JSON válido.");
+  }
 
   if (!Array.isArray(data)) {
-  throw new Error("El JSON debe contener una lista entre [ y ].");
+    throw new Error("La API debe devolver una lista de precios.");
   }
 
   const invalidIndex = data.findIndex(
