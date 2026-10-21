@@ -7,12 +7,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --green: #286449;
-  --green-dark: #173e2d;
-  --green-soft: #eaf3ec;
+  --green: #357a58;
+  --green-dark: #1d5139;
+  --green-soft: #e8f3eb;
   --text: #233b32;
   --muted: #68776f;
-  --border: #e0e7df;
+  --border: #dfe8e1;
   --surface: #ffffff;
 }
 
@@ -474,6 +474,16 @@ h1 {
   line-height: 1.7;
 }
 
+.demo-notice {
+  margin: -2px 0 20px;
+  padding: 9px 12px;
+  border-left: 3px solid #d5a343;
+  background: #fff8e8;
+  color: #765b24;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 .history-panel {
   margin-top: 0;
 }
@@ -643,6 +653,7 @@ h1 {
 
 .prices-table {
   width: 100%;
+  min-width: 680px;
   border-collapse: collapse;
   text-align: left;
   font-size: 13px;
@@ -916,9 +927,12 @@ h1 {
 
   .stat-card,
   .panel,
-  .reading-guide,
   .bulletin-status {
     padding: 20px;
+  }
+
+  .reading-guide {
+    display: none;
   }
 
   .stat-value {
@@ -958,27 +972,27 @@ h1 {
 /* Identidad visual de Pizarra Agro */
 
 :root {
-  background: #f1f3f5;
+  background: #f4f7f4;
   --surface: #ffffff;
-  --border: #e1e5e8;
+  --border: #dfe8e1;
 }
 
 body,
 .app-shell,
 .main-shell {
-  background: #dce2ee;
+  background: #f4f7f4;
 }
 
 /* Menú verde */
 
 .sidebar {
-  background: #082218;
-  border-right-color: #1b4b38;
+  background: #1b523a;
+  border-right-color: #2c6d4d;
   color: #ffffff;
 }
 
 .brand-logo {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.14);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -1004,16 +1018,16 @@ body,
 
 .sidebar-nav a:hover,
 .sidebar-nav a:focus-visible {
-  background: rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.16);
   color: #ffffff;
 }
 
 .sidebar a:focus-visible {
-  outline-color: #d5f3a6;
+  outline-color: #c7edb3;
 }
 
 .sidebar-note-icon {
-  color: #d5f3a6;
+  color: #c7edb3;
 }
 
 .sidebar-note h2 {
@@ -1025,7 +1039,7 @@ body,
 }
 
 .location-label {
-  color: #d5f3a6;
+  color: #c7edb3;
 }
 
 .sidebar-footer {
@@ -1051,13 +1065,13 @@ body,
 .panel,
 .reading-guide,
 .bulletin-status {
-  background: #fffefe;
-  border-color: #cbcbcc;
-  box-shadow: 0 3px 14px rgba(25, 45, 35, 0.035);
+  background: #ffffff;
+  border-color: #dfe8e1;
+  box-shadow: 0 2px 10px rgba(25, 65, 45, 0.045);
 }
 
 .topbar {
-  background: #fffafa;
+  background: #ffffff;
 }
 
 .reading-guide .guide-note {
@@ -1066,7 +1080,7 @@ body,
 
 @media (max-width: 900px) {
   .sidebar {
-    border-bottom-color: #032218;
+    border-bottom-color: #2c6d4d;
   }
 
   .sidebar-nav a {
