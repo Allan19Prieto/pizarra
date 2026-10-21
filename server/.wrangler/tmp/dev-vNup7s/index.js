@@ -41,6 +41,27 @@ var src_default = {
         `).all();
         return Response.json(results);
       }
+      if (url.pathname === "/api/bulletins") {
+        const { results } = await env.DB.prepare(`
+        SELECT
+          b.market_date AS date,
+          b.source_url AS sourceUrl,
+          b.imported_at AS importedAt,
+          (
+            SELECT COUNT(*)
+            FROM prices AS p
+            WHERE p.bulletin_id = b.id
+          ) AS recordCount,
+          (
+            SELECT COUNT(*)
+            FROM bulletin_revisions AS r
+            WHERE r.bulletin_id = b.id
+          ) AS revisionCount
+        FROM bulletins AS b
+        ORDER BY b.market_date DESC
+      `).all();
+        return Response.json(results);
+      }
       return Response.json(
         { error: "Ruta no encontrada." },
         { status: 404 }

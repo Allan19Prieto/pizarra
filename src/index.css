@@ -389,3 +389,31 @@ footer {
   color: #71e2b0;
   font-weight: 700;
 }
+
+.bulletin-status {
+  margin: 1.5rem 0;
+  padding: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.bulletin-status h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+}
+
+.bulletin-status p {
+  line-height: 1.6;
+}
+
+.bulletin-status a {
+  color: #86efac;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.bulletin-note {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}

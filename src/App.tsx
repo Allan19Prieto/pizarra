@@ -4,6 +4,7 @@ import PriceHistory from "./components/PriceHistory";
 import type { PriceRecord } from "./types/market";
 import { productKey } from "./types/market";
 import { getPrices } from "./services/marketService";
+import BulletinStatus from "./components/BulletinStatus";
 
 const currencyFormatter = new Intl.NumberFormat("es-CR", {
   style: "currency",
@@ -111,11 +112,13 @@ export default function App() {
           </p>
 
           <p className="demo-notice">
-            <strong>Datos de demostración:</strong> los precios
-            mostrados son ficticios. Todavía no están conectados
-            con los boletines oficiales de PIMA/CENADA.
+            Precios de referencia de los boletines de PIMA/CENADA.
+            Cada precio corresponde a la fecha y unidad de comercialización
+            indicadas. No representa una cotización en tiempo real.
           </p>
         </section>
+
+        <BulletinStatus />
 
         {loading ? (
           <section className="panel">
@@ -213,8 +216,7 @@ export default function App() {
       <footer className="footer">
         <p>RP · Rubén Prieto</p>
         <p>
-          Versión de demostración. Fuente oficial prevista:
-          boletines de PIMA/CENADA.
+          Fuente: boletines de precios de PIMA/CENADA.
         </p>
       </footer>
     </div>
