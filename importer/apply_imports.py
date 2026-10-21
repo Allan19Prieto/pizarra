@@ -4,6 +4,45 @@ import subprocess
 import argparse
 from pathlib import Path
 
+def parse_wrangler_json(output: str):
+    text = output.strip()
+
+    # Primero intenta leer una respuesta JSON limpia.
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+
+    # Wrangler puede escribir mensajes de progreso antes del JSON.
+    decoder = json.JSONDecoder()
+
+    for index, character in enumerate(text):
+        if character != "[":
+            continue
+
+        try:
+            result, end = decoder.raw_decode(text, index)
+        except json.JSONDecodeError:
+            continue
+
+        # Aceptamos únicamente una lista de respuestas de Wrangler,
+        # sin contenido adicional después del JSON.
+        if (
+            isinstance(result, list)
+            and len(result) > 0
+            and all(
+                isinstance(item, dict)
+                and isinstance(item.get("success"), bool)
+                for item in result
+            )
+            and not text[end:].strip()
+        ):
+            return result
+
+    raise ValueError(
+        "Wrangler no devolvió el JSON esperado:\n" + output
+    )
+
 
 ROOT = Path(__file__).resolve().parent
 PROJECT = ROOT.parent
@@ -65,7 +104,7 @@ def execute(*arguments):
         )
 
     try:
-        responses = json.loads(result.stdout)
+        responses = parse_wrangler_json(result.stdout)
     except json.JSONDecodeError:
         raise RuntimeError(
             "Wrangler no devolvió el JSON esperado:\n"
