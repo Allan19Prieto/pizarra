@@ -204,6 +204,10 @@ def main():
     for bulletin in bulletins:
         print(f"{bulletin['date']} -> {bulletin['url']}")
 
+    return opener, bulletins
+    
 
+
+    
 if __name__ == "__main__":
     main()

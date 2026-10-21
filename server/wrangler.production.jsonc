@@ -1,0 +1,14 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "pizarra-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-20",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "pizarra-production",
+      "database_id": "dbc89e18-5068-49f2-b919-4c284fa758bd",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

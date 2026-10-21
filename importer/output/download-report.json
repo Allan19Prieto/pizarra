@@ -1,0 +1,95 @@
+{
+  "checkedAt": "2026-10-21T06:15:42.868032+00:00",
+  "status": "ok",
+  "validated": [
+    {
+      "date": "2026-10-20",
+      "url": "https://bpm.pima.go.cr/AccessDoc.aspx?Us9MxE9rVjvqcU7NXp0d9OdkakSxXvuY89kwF7oSq7lHX56k3ZZpDQW10GbWz5qw",
+      "pdfHash": "46ef53abde1ed13331c28735f054b7c41d777574db83f98ad3004c1e1dd433f0",
+      "recordCount": 50,
+      "path": "/home/allan/Documents/ProyectosRP/pizarra/importer/pdfs/boletin-2026-10-20-46ef53abde1ed13331c28735f054b7c41d777574db83f98ad3004c1e1dd433f0.pdf",
+      "fileStatus": "already_saved"
+    },
+    {
+      "date": "2026-10-19",
+      "url": "https://bpm.pima.go.cr/AccessDoc.aspx?Us9MxE9rVjsyowOmixWVP9+BGsmw95Bo9yYvcJpYfJKzIdEFBT9bRbKDIqAJIsL8",
+      "pdfHash": "09439a1ae8bc56b2fb8c3856cd5492fbbc9cc35f7e98e6dac1c0406cd7e3240a",
+      "recordCount": 58,
+      "path": "/home/allan/Documents/ProyectosRP/pizarra/importer/pdfs/boletin-2026-10-19-09439a1ae8bc56b2fb8c3856cd5492fbbc9cc35f7e98e6dac1c0406cd7e3240a.pdf",
+      "fileStatus": "already_saved"
+    },
+    {
+      "date": "2026-10-16",
+      "url": "https://bpm.pima.go.cr/AccessDoc.aspx?Us9MxE9rVjshGAkktLjv8ep4se1f/iCwhFy8bAQBZpoxoyIl7L/CYFIyfHt9Ga1y",
+      "pdfHash": "f7104e27f6117458cc4b98871f2110be3ddb9d0e11cfc7fac3e4638fb88d4589",
+      "recordCount": 58,
+      "path": "/home/allan/Documents/ProyectosRP/pizarra/importer/pdfs/boletin-2026-10-16-f7104e27f6117458cc4b98871f2110be3ddb9d0e11cfc7fac3e4638fb88d4589.pdf",
+      "fileStatus": "already_saved"
+    },
+    {
+      "date": "2026-10-15",
+      "url": "https://bpm.pima.go.cr/AccessDoc.aspx?Us9MxE9rVjufcybyDiY0ophtK7s6qj7cH+D4P7z9GvdLVpK6sXdjhl7gbNMJg1K9",
+      "pdfHash": "565a85936191f2e2a11af52ecdcca0a0368328221bc93d273a96c14252c81b57",
+      "recordCount": 51,
+      "path": "/home/allan/Documents/ProyectosRP/pizarra/importer/pdfs/boletin-2026-10-15-565a85936191f2e2a11af52ecdcca0a0368328221bc93d273a96c14252c81b57.pdf",
+      "fileStatus": "already_saved"
+    },
+    {
+      "date": "2026-10-14",
+      "url": "https://bpm.pima.go.cr/AccessDoc.aspx?Us9MxE9rVjsGj5MIDZy4E+UHDCJPKowul8ty3jk5EzkbGZNPJ/EFrIqhuuk+6YZN",
+      "pdfHash": "3e0241a384e6fb9937bb43ff076ef59b528a62be739b86a4badaafeb2542dcd5",
+      "recordCount": 65,
+      "path": "/home/allan/Documents/ProyectosRP/pizarra/importer/pdfs/boletin-2026-10-14-3e0241a384e6fb9937bb43ff076ef59b528a62be739b86a4badaafeb2542dcd5.pdf",
+      "fileStatus": "already_saved"
+    },
+    {
+      "date": "2026-10-13",
+      "url": "https://bpm.pima.go.cr/AccessDoc.aspx?Us9MxE9rVjsvwljemSNnQ8/ouDrLRIb01k3gHa6LrpepAlEFFgiWH4l+smjgUbbx",
+      "pdfHash": "d808841e1b581924271114cdf1cc316d05cdee4e0916b63f7120b3ea9a1dc8df",
+      "recordCount": 53,
+      "path": "/home/allan/Documents/ProyectosRP/pizarra/importer/pdfs/boletin-2026-10-13-d808841e1b581924271114cdf1cc316d05cdee4e0916b63f7120b3ea9a1dc8df.pdf",
+      "fileStatus": "already_saved"
+    },
+    {
+      "date": "2026-10-12",
+      "url": "https://bpm.pima.go.cr/AccessDoc.aspx?Us9MxE9rVjvORN671x0a9DNHO8Cry1rMDnPxXoEMY7nxa/Q4b9/PYOHfLO3A+fYq",
+      "pdfHash": "649c7b38ebdee0f1a8c32b33c2ca53cb68df5538448cafca8024635e681785ba",
+      "recordCount": 59,
+      "path": "/home/allan/Documents/ProyectosRP/pizarra/importer/pdfs/boletin-2026-10-12-649c7b38ebdee0f1a8c32b33c2ca53cb68df5538448cafca8024635e681785ba.pdf",
+      "fileStatus": "already_saved"
+    },
+    {
+      "date": "2026-10-09",
+      "url": "https://bpm.pima.go.cr/AccessDoc.aspx?Us9MxE9rVjvM7z0tphOEB01UR8YkyxwyxG2fUJ131xdmjHr7vI/mlaC1M0Wztqxp",
+      "pdfHash": "d48a372dd7436ee3fb05cecc308a3c158efad41ab0075b7793c012d0cac513be",
+      "recordCount": 59,
+      "path": "/home/allan/Documents/ProyectosRP/pizarra/importer/pdfs/boletin-2026-10-09-d48a372dd7436ee3fb05cecc308a3c158efad41ab0075b7793c012d0cac513be.pdf",
+      "fileStatus": "already_saved"
+    },
+    {
+      "date": "2026-10-08",
+      "url": "https://bpm.pima.go.cr/AccessDoc.aspx?Us9MxE9rVjt46upSw37xvjN3NwHWxIHaFklNdCr/CxyJz+VZTl4TJds718fMP++q",
+      "pdfHash": "63ba20ef36d4a836d1a832e32f9052cca00c855e22c38ca459e785d606c4c226",
+      "recordCount": 53,
+      "path": "/home/allan/Documents/ProyectosRP/pizarra/importer/pdfs/boletin-2026-10-08-63ba20ef36d4a836d1a832e32f9052cca00c855e22c38ca459e785d606c4c226.pdf",
+      "fileStatus": "already_saved"
+    },
+    {
+      "date": "2026-10-07",
+      "url": "https://bpm.pima.go.cr/AccessDoc.aspx?Us9MxE9rVjudIxGRnYfVh7kBfre3lhws77uX+G2/irVicpFw5YnUUIWO+smCruyx",
+      "pdfHash": "487a57de5c042d901c5d1be6261abb1ddf472cd8e14976389db3e772a50b7294",
+      "recordCount": 67,
+      "path": "/home/allan/Documents/ProyectosRP/pizarra/importer/pdfs/boletin-2026-10-07-487a57de5c042d901c5d1be6261abb1ddf472cd8e14976389db3e772a50b7294.pdf",
+      "fileStatus": "already_saved"
+    },
+    {
+      "date": "2026-10-06",
+      "url": "https://bpm.pima.go.cr/AccessDoc.aspx?Us9MxE9rVjslEQ/aO/XV73hbvNPvCiHEvEml+0ig/kV34k3WFeDjU8G4PUnRcu3l",
+      "pdfHash": "254b8e735179aea9bf6c03168414a164f65857e73948799c31448ab104052e32",
+      "recordCount": 53,
+      "path": "/home/allan/Documents/ProyectosRP/pizarra/importer/pdfs/boletin-2026-10-06-254b8e735179aea9bf6c03168414a164f65857e73948799c31448ab104052e32.pdf",
+      "fileStatus": "already_saved"
+    }
+  ],
+  "errors": []
+}
