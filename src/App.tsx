@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import PricesTable from "./components/PricesTable";
 import PriceHistory from "./components/PriceHistory";
+import BulletinStatus from "./components/BulletinStatus";
 import type { PriceRecord } from "./types/market";
 import { productKey } from "./types/market";
 import { getPrices } from "./services/marketService";
-import BulletinStatus from "./components/BulletinStatus";
 
 const currencyFormatter = new Intl.NumberFormat("es-CR", {
   style: "currency",
@@ -50,13 +50,9 @@ export default function App() {
         if (!active) return;
 
         console.error("Error al cargar los precios:", cause);
-        setError(
-          "No pudimos cargar los precios. Intenta nuevamente."
-        );
+        setError("No pudimos cargar los precios. Intenta nuevamente.");
       } finally {
-        if (active) {
-          setLoading(false);
-        }
+        if (active) setLoading(false);
       }
     }
 
@@ -74,151 +70,284 @@ export default function App() {
   const first = history[0];
   const latest = history[history.length - 1];
 
+  const latestBulletinDate = records.reduce(
+    (date, record) => (record.date > date ? record.date : date),
+    ""
+  );
+
   const variation =
     history.length >= 2 && first && latest && first.mode > 0
       ? (latest.mode - first.mode) / first.mode
       : null;
 
   return (
-    <div className="app">
-      <header className="header">
-        <div className="brand">
-          <span className="brand-logo" aria-hidden="true">
-            RP
+    <div className="app-shell">
+      <a className="skip-link" href="#contenido">
+        Saltar al contenido
+      </a>
+
+      <aside className="sidebar">
+        <a
+            className="brand"
+            href="#panorama"
+            aria-label="Pizarra Agro, inicio"
+          >
+            <span className="brand-logo" aria-hidden="true">
+              <svg
+                viewBox="0 0 40 40"
+                width="34"
+                height="34"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect x="6" y="6" width="28" height="22" rx="3" />
+                <path d="M12 13h16M12 19h10" />
+                <path d="M15 28l-4 7M25 28l4 7M20 3v3" />
+              </svg>
+            </span>
+
+            <div>
+              <p className="brand-name">Pizarra Agro</p>
+              <p className="brand-description">Inteligencia de mercado</p>
+            </div>
+          </a>
+
+        <p className="nav-label">Mercado mayorista</p>
+
+        <nav className="sidebar-nav" aria-label="Secciones del dashboard">
+          <a href="#panorama">
+            <span aria-hidden="true">◫</span>
+            Panorama del mercado
+          </a>
+          <a href="#evolucion">
+            <span aria-hidden="true">↗</span>
+            Evolución de precios
+          </a>
+          <a href="#precios">
+            <span aria-hidden="true">≡</span>
+            Precios por producto
+          </a>
+          <a href="#boletines">
+            <span aria-hidden="true">▤</span>
+            Boletines y fuentes
+          </a>
+        </nav>
+
+        <div className="sidebar-note">
+          <span className="sidebar-note-icon" aria-hidden="true">
+            ↗
+          </span>
+          <h2>El mercado, más claro.</h2>
+          <p>
+            Información para conocer el valor de lo que cultivamos.
+          </p>
+          <span className="location-label">CENADA · COSTA RICA</span>
+        </div>
+
+        <div className="sidebar-footer">
+          <span className="profile-avatar" aria-hidden="true">
+            PA
           </span>
 
           <div>
-            <p className="brand-name">Rubén Prieto</p>
-            <p className="brand-description">
-              Precios y estadísticas CENADA
-            </p>
+            <strong>Pizarra Agro</strong>
+            <span>Precios del mercado agrícola</span>
           </div>
         </div>
+      </aside>
 
-        <span className="status-badge">Demostración</span>
-      </header>
-
-      <main className="main">
-        <section className="intro" aria-labelledby="page-title">
-          <p className="eyebrow">Información de mercado</p>
-
-          <h1 id="page-title">
-            Consulta precios. Comprende sus cambios.
-          </h1>
-
-          <p>
-            Explora los precios por producto y unidad, y compara
-            su evolución en el tiempo.
+      <div className="main-shell">
+        <header className="topbar">
+          <p className="breadcrumb">
+            Mercados <span>/</span> <strong>CENADA</strong>
           </p>
 
-          <p className="demo-notice">
-            Precios de referencia de los boletines de PIMA/CENADA.
-            Cada precio corresponde a la fecha y unidad de comercialización
-            indicadas. No representa una cotización en tiempo real.
-          </p>
-        </section>
+          <a
+            className="source-link"
+            href="https://www.pima.go.cr/boletin/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Consultar fuente oficial <span aria-hidden="true">↗</span>
+          </a>
+        </header>
 
-        <BulletinStatus />
+        <main id="contenido" className="workspace" tabIndex={-1}>
+          <section id="panorama" aria-labelledby="page-title">
+            <div className="titlebar">
+              <div>
+                <p className="eyebrow">Observatorio de precios</p>
+                <h1 id="page-title">Panorama del mercado.</h1>
+                <p className="intro-description">
+                  Precios mayoristas. Una perspectiva más completa.
+                </p>
+              </div>
 
-        {loading ? (
-          <section className="panel">
-            <p role="status">Cargando precios…</p>
-          </section>
-        ) : error ? (
-          <section className="panel">
-            <p role="alert">{error}</p>
-          </section>
-        ) : records.length === 0 ? (
-          <section className="panel">
-            <p>No hay precios disponibles.</p>
-          </section>
-        ) : (
-          <>
-            {latest && (
-              <section aria-labelledby="selection-title">
-                <div className="selection-heading">
-                  <h2 id="selection-title">
-                    {latest.product} · {latest.unit}
-                  </h2>
+              <div className="bulletin-date">
+                <span>Último boletín disponible en la base</span>
+                <strong>
+                  {loading
+                    ? "Consultando…"
+                    : latestBulletinDate
+                      ? formatDate(latestBulletinDate)
+                      : "Sin fecha disponible"}
+                </strong>
+              </div>
+            </div>
 
-                  <p>
-                    Las tarjetas y el gráfico muestran el historial
-                    completo del producto seleccionado. El filtro
-                    de fecha solo modifica la tabla.
+            <p className="market-notice">
+              <span className="notice-dot" aria-hidden="true" />
+              Precios de referencia de PIMA/CENADA. Corresponden a la
+              fecha y unidad indicadas; no son cotizaciones en tiempo real.
+            </p>
+          </section>
+
+          {loading ? (
+            <section className="panel state-panel">
+              <p role="status">Cargando precios del mercado…</p>
+            </section>
+          ) : error ? (
+            <section className="panel state-panel">
+              <p role="alert">{error}</p>
+              <button
+                className="action-button"
+                type="button"
+                onClick={() => window.location.reload()}
+              >
+                Volver a intentar
+              </button>
+            </section>
+          ) : records.length === 0 ? (
+            <section className="panel state-panel">
+              <h2>Aún no hay precios disponibles</h2>
+              <p>Los boletines importados aparecerán aquí.</p>
+            </section>
+          ) : (
+            <>
+              {latest && (
+                <section aria-labelledby="selection-title">
+                  <div className="selection-heading">
+                    <div>
+                      <p className="eyebrow">Producto seleccionado</p>
+                      <h2 id="selection-title">{latest.product}</h2>
+                    </div>
+                    <span className="unit-badge">{latest.unit}</span>
+                  </div>
+
+                  <div className="stats-grid">
+                    <article className="stat-card">
+                      <h3>Última moda registrada</h3>
+                      <p className="stat-value">
+                        {currencyFormatter.format(latest.mode)}
+                      </p>
+                      <p className="stat-description">
+                        Por {latest.unit} · {formatDate(latest.date)}
+                      </p>
+                    </article>
+
+                    <article className="stat-card">
+                      <h3>Rango de precios</h3>
+                      <p className="stat-value range-value">
+                        {currencyFormatter.format(latest.min)}
+                        {" – "}
+                        {currencyFormatter.format(latest.max)}
+                      </p>
+                      <p className="stat-description">
+                        Mínimo y máximo por {latest.unit}
+                        {" · "}
+                        {formatDate(latest.date)}
+                      </p>
+                    </article>
+
+                    <article className="stat-card">
+                      <h3>Variación en el historial</h3>
+                      <p className="stat-value variation-value">
+                        {variation === null
+                          ? "Sin comparación"
+                          : percentFormatter.format(variation)}
+                      </p>
+                      <p className="stat-description">
+                        {variation !== null && first
+                          ? `${formatDate(first.date)} al ${formatDate(
+                              latest.date
+                            )}`
+                          : "Se necesitan dos fechas y una moda inicial mayor que cero."}
+                      </p>
+                    </article>
+                  </div>
+                </section>
+              )}
+
+              <div className="analysis-grid">
+                <section id="evolucion" aria-label="Evolución de precios">
+                  <PriceHistory
+                    records={records}
+                    selectedProductKey={selectedProductKey}
+                    onSelectProduct={setSelectedProductKey}
+                  />
+                </section>
+
+                <aside className="reading-guide">
+                  <p className="eyebrow">Una lectura más clara</p>
+                  <h2>Comprende los precios</h2>
+
+                  <dl>
+                    <div>
+                      <dt>Moda</dt>
+                      <dd>
+                        Es el precio que aparece con mayor frecuencia
+                        entre las observaciones del boletín.
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Mínimo y máximo</dt>
+                      <dd>
+                        Delimitan el rango de precios observado para
+                        ese producto, unidad y fecha.
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Unidad de comercialización</dt>
+                      <dd>
+                        Compara precios de la misma unidad: una caja,
+                        un kilo y un rollo no son equivalentes.
+                      </dd>
+                    </div>
+                  </dl>
+
+                  <p className="guide-note">
+                    Las tarjetas y el gráfico muestran el historial del
+                    producto seleccionado. El filtro de fecha de la
+                    tabla modifica únicamente la tabla.
                   </p>
-                </div>
+                </aside>
+              </div>
 
-                <div className="stats-grid">
-                  <article className="stat-card">
-                    <h3>Última moda registrada</h3>
-
-                    <p className="stat-value">
-                      {currencyFormatter.format(latest.mode)}
-                    </p>
-
-                    <p className="stat-description">
-                      Por {latest.unit} · {formatDate(latest.date)}
-                    </p>
-                  </article>
-
-                  <article className="stat-card">
-                    <h3>Rango de precios</h3>
-
-                    <p className="stat-value range-value">
-                      {currencyFormatter.format(latest.min)}
-                      {" – "}
-                      {currencyFormatter.format(latest.max)}
-                    </p>
-
-                    <p className="stat-description">
-                      Mínimo y máximo por {latest.unit}
-                      {" · "}
-                      {formatDate(latest.date)}
-                    </p>
-                  </article>
-
-                  <article className="stat-card">
-                    <h3>Variación de la moda</h3>
-
-                    <p className="stat-value">
-                      {variation === null
-                        ? "Sin comparación"
-                        : percentFormatter.format(variation)}
-                    </p>
-
-                    <p className="stat-description">
-                      {variation !== null && first
-                        ? `${formatDate(first.date)} al ${formatDate(
-                            latest.date
-                          )}`
-                        : "Se necesitan dos fechas y una moda inicial mayor que cero."}
-                    </p>
-                  </article>
-                </div>
+              <section id="precios" aria-label="Precios por producto">
+                <PricesTable
+                  records={records}
+                  selectedProductKey={selectedProductKey}
+                  onSelectProduct={setSelectedProductKey}
+                />
               </section>
-            )}
+            </>
+          )}
 
-            <PricesTable
-              records={records}
-              selectedProductKey={selectedProductKey}
-              onSelectProduct={setSelectedProductKey}
-            />
+          <section id="boletines" aria-label="Boletines y fuentes">
+            <BulletinStatus />
+          </section>
 
-            <PriceHistory
-              records={records}
-              selectedProductKey={selectedProductKey}
-              onSelectProduct={setSelectedProductKey}
-            />
-          </>
-        )}
-      </main>
-
-      <footer className="footer">
-        <p>RP · Rubén Prieto</p>
-        <p>
-          Fuente: boletines de precios de PIMA/CENADA.
-        </p>
-      </footer>
+          <footer className="footer">
+            <p><strong>Pizarra Agro</strong></p>
+            <p>
+              Panel independiente · Fuente: boletines de PIMA/CENADA.
+            </p>
+          </footer>
+        </main>
+      </div>
     </div>
   );
 }
