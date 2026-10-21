@@ -1,56 +1,182 @@
 [
   {
-    "date": "2026-10-15",
+    "date": "2026-10-21",
     "product": "Tomate",
     "unit": "kg",
-    "min": 700,
-    "max": 1100,
-    "mode": 900,
-    "average": 920
+    "min": 1000,
+    "max": 1700,
+    "mode": 1300,
+    "average": 1320
   },
   {
-    "date": "2026-10-15",
+    "date": "2026-10-21",
     "product": "Papa",
-    "unit": "kg",
-    "min": 600,
-    "max": 850,
-    "mode": 750,
-    "average": 730
-  },
-  {
-    "date": "2026-10-15",
-    "product": "Culantro coyote",
-    "unit": "rollo",
-    "min": 150,
-    "max": 250,
-    "mode": 200,
-    "average": 195
-  },
-  {
-    "date": "2026-10-16",
-    "product": "Tomate",
     "unit": "kg",
     "min": 800,
-    "max": 1200,
-    "mode": 1050,
-    "average": 980
+    "max": 1150,
+    "mode": 950,
+    "average": 970
   },
   {
-    "date": "2026-10-16",
-    "product": "Papa",
+    "date": "2026-10-21",
+    "product": "Culantro coyote",
+    "unit": "rollo",
+    "min": 350,
+    "max": 450,
+    "mode": 400,
+    "average": 410
+  },
+  {
+    "date": "2026-10-21",
+    "product": "Cebolla",
     "unit": "kg",
-    "min": 650,
-    "max": 900,
+    "min": 600,
+    "max": 950,
     "mode": 800,
     "average": 780
   },
   {
-    "date": "2026-10-16",
+    "date": "2026-10-22",
+    "product": "Tomate",
+    "unit": "kg",
+    "min": 950,
+    "max": 1600,
+    "mode": 1200,
+    "average": 1250
+  },
+  {
+    "date": "2026-10-22",
+    "product": "Papa",
+    "unit": "kg",
+    "min": 850,
+    "max": 1200,
+    "mode": 1000,
+    "average": 1020
+  },
+  {
+    "date": "2026-10-22",
     "product": "Culantro coyote",
     "unit": "rollo",
-    "min": 175,
-    "max": 275,
-    "mode": 225,
-    "average": 220
+    "min": 325,
+    "max": 425,
+    "mode": 375,
+    "average": 380
+  },
+  {
+    "date": "2026-10-22",
+    "product": "Cebolla",
+    "unit": "kg",
+    "min": 650,
+    "max": 1000,
+    "mode": 850,
+    "average": 820
+  },
+  {
+    "date": "2026-10-23",
+    "product": "Tomate",
+    "unit": "kg",
+    "min": 900,
+    "max": 1500,
+    "mode": 1150,
+    "average": 1200
+  },
+  {
+    "date": "2026-10-23",
+    "product": "Papa",
+    "unit": "kg",
+    "min": 900,
+    "max": 1250,
+    "mode": 1100,
+    "average": 1080
+  },
+  {
+    "date": "2026-10-23",
+    "product": "Culantro coyote",
+    "unit": "rollo",
+    "min": 300,
+    "max": 400,
+    "mode": 350,
+    "average": 360
+  },
+  {
+    "date": "2026-10-23",
+    "product": "Cebolla",
+    "unit": "kg",
+    "min": 700,
+    "max": 1050,
+    "mode": 900,
+    "average": 880
+  },
+  {
+    "date": "2026-10-26",
+    "product": "Tomate",
+    "unit": "kg",
+    "min": 1000,
+    "max": 1650,
+    "mode": 1300,
+    "average": 1280
+  },
+  {
+    "date": "2026-10-26",
+    "product": "Papa",
+    "unit": "kg",
+    "min": 850,
+    "max": 1200,
+    "mode": 1000,
+    "average": 1030
+  },
+  {
+    "date": "2026-10-26",
+    "product": "Culantro coyote",
+    "unit": "rollo",
+    "min": 325,
+    "max": 450,
+    "mode": 400,
+    "average": 390
+  },
+  {
+    "date": "2026-10-26",
+    "product": "Cebolla",
+    "unit": "kg",
+    "min": 750,
+    "max": 1100,
+    "mode": 950,
+    "average": 920
+  },
+  {
+    "date": "2026-10-27",
+    "product": "Tomate",
+    "unit": "kg",
+    "min": 1100,
+    "max": 1750,
+    "mode": 1400,
+    "average": 1380
+  },
+  {
+    "date": "2026-10-27",
+    "product": "Papa",
+    "unit": "kg",
+    "min": 800,
+    "max": 1150,
+    "mode": 950,
+    "average": 980
+  },
+  {
+    "date": "2026-10-27",
+    "product": "Culantro coyote",
+    "unit": "rollo",
+    "min": 350,
+    "max": 475,
+    "mode": 425,
+    "average": 415
+  },
+  {
+    "date": "2026-10-27",
+    "product": "Cebolla",
+    "unit": "kg",
+    "min": 700,
+    "max": 1000,
+    "mode": 850,
+    "average": 860
   }
 ]

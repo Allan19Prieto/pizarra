@@ -51,8 +51,20 @@ export async function getPrices(): Promise<PriceRecord[]> {
 
   const data: unknown = await response.json();
 
-  if (!Array.isArray(data) || !data.every(isPriceRecord)) {
-    throw new Error("El archivo contiene registros inválidos.");
+  if (!Array.isArray(data)) {
+  throw new Error("El JSON debe contener una lista entre [ y ].");
+  }
+
+  const invalidIndex = data.findIndex(
+    (record) => !isPriceRecord(record)
+  );
+
+  if (invalidIndex !== -1) {
+    console.error("Registro inválido:", data[invalidIndex]);
+
+    throw new Error(
+      `El registro número ${invalidIndex + 1} contiene datos inválidos.`
+    );
   }
 
   return data;
