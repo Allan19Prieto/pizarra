@@ -1,28 +1,7 @@
 {
-  "downloadCheckedAt": "2026-10-21T06:15:42.868032+00:00",
+  "downloadCheckedAt": "2026-10-24T21:57:57.564479+00:00",
   "status": "prepared",
   "bulletins": [
-    {
-      "date": "2026-10-06",
-      "pdfHash": "254b8e735179aea9bf6c03168414a164f65857e73948799c31448ab104052e32",
-      "recordCount": 53,
-      "sqlPath": "/home/allan/Documents/ProyectosRP/pizarra/importer/output/imports/import-2026-10-06-254b8e735179aea9bf6c03168414a164f65857e73948799c31448ab104052e32.sql",
-      "sqlHash": "658557e50dc4c1ea037bc2e894f3c20a4030347966ac537c87976f0716af0565"
-    },
-    {
-      "date": "2026-10-07",
-      "pdfHash": "487a57de5c042d901c5d1be6261abb1ddf472cd8e14976389db3e772a50b7294",
-      "recordCount": 67,
-      "sqlPath": "/home/allan/Documents/ProyectosRP/pizarra/importer/output/imports/import-2026-10-07-487a57de5c042d901c5d1be6261abb1ddf472cd8e14976389db3e772a50b7294.sql",
-      "sqlHash": "520886d1d0234a8306c53f5e89109b0b4181a8aa83825bec48b80a2a10fe6c76"
-    },
-    {
-      "date": "2026-10-08",
-      "pdfHash": "63ba20ef36d4a836d1a832e32f9052cca00c855e22c38ca459e785d606c4c226",
-      "recordCount": 53,
-      "sqlPath": "/home/allan/Documents/ProyectosRP/pizarra/importer/output/imports/import-2026-10-08-63ba20ef36d4a836d1a832e32f9052cca00c855e22c38ca459e785d606c4c226.sql",
-      "sqlHash": "9cdddd6b526d9b01401c0d5f99370e6ae6f1f1886d0656072cf41773ee04218c"
-    },
     {
       "date": "2026-10-09",
       "pdfHash": "d48a372dd7436ee3fb05cecc308a3c158efad41ab0075b7793c012d0cac513be",
@@ -78,6 +57,27 @@
       "recordCount": 50,
       "sqlPath": "/home/allan/Documents/ProyectosRP/pizarra/importer/output/imports/import-2026-10-20-46ef53abde1ed13331c28735f054b7c41d777574db83f98ad3004c1e1dd433f0.sql",
       "sqlHash": "e1b5a971901abe829f23477ecc2852f848a35ad999a83de677291179469ec1e9"
+    },
+    {
+      "date": "2026-10-21",
+      "pdfHash": "fea313dc310646e7ae307f4559ed7168b93e6aa41f2639563f0ed1c661a43956",
+      "recordCount": 61,
+      "sqlPath": "/home/allan/Documents/ProyectosRP/pizarra/importer/output/imports/import-2026-10-21-fea313dc310646e7ae307f4559ed7168b93e6aa41f2639563f0ed1c661a43956.sql",
+      "sqlHash": "4cf1e38b8b4a9f154bec83f3bbf14172c34f7b00f83e52a0099f74df536ec697"
+    },
+    {
+      "date": "2026-10-22",
+      "pdfHash": "324b011d27c565014c95021f15fd9fe748a5549ab4262bdbe6cef84333702724",
+      "recordCount": 52,
+      "sqlPath": "/home/allan/Documents/ProyectosRP/pizarra/importer/output/imports/import-2026-10-22-324b011d27c565014c95021f15fd9fe748a5549ab4262bdbe6cef84333702724.sql",
+      "sqlHash": "f72bf03cdd7a7eb7af5cf1f72a19de97a129d87ed39d7068f0955b3be7303d84"
+    },
+    {
+      "date": "2026-10-23",
+      "pdfHash": "13de1e4c33fa443d854f2d6df76d349c349844726dd05b4844c5e84b81dedef6",
+      "recordCount": 58,
+      "sqlPath": "/home/allan/Documents/ProyectosRP/pizarra/importer/output/imports/import-2026-10-23-13de1e4c33fa443d854f2d6df76d349c349844726dd05b4844c5e84b81dedef6.sql",
+      "sqlHash": "829868999778d7f38b116df75483a3792be1f6c11534b5118ae60f45e521bb12"
     }
   ]
 }
