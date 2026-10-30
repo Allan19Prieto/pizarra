@@ -1,75 +1,26 @@
-# React + TypeScript + Vite
+# Pizarra de precios CENADA
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web para consultar y actualizar los precios de productos agrícolas del CENADA a partir de sus boletines.
 
-Currently, two official plugins are available:
+🌐 **[Ver la página](https://pizarra-api.allanbanilla.workers.dev/)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tecnologías utilizadas
 
-## React Compiler
+- **Astro:** desarrollo de la página web.
+- **Python:** scripts para procesar los boletines y actualizar los precios.
+- **GitHub Actions:** ejecución automatizada de los scripts de actualización.
+- **Cloudflare:** alojamiento de la aplicación.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Proceso de actualización
 
-## Expanding the ESLint configuration
+1. Los scripts de Python procesan los boletines del CENADA.
+2. Se extraen los datos de los productos y sus precios.
+3. Se actualiza la información disponible en la página.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+El proceso se ejecuta mediante GitHub Actions para automatizar la actualización de los datos.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Fuente de información
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Los precios publicados provienen de los boletines del **Centro Nacional de Abastecimiento y Distribución de Alimentos (CENADA)**.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+Este proyecto es una herramienta independiente de consulta y no representa un sitio oficial del CENADA.
