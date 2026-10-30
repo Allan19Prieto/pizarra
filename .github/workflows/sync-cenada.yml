@@ -1,0 +1,90 @@
+name: Actualizar boletines CENADA
+
+on:
+  workflow_dispatch:
+    inputs:
+      import_production:
+        description: "Importar los boletines validados en producción"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cenada-production-import
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Descargar código
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar lector de PDF
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils
+
+      - name: Instalar dependencias del proyecto
+        run: npm ci
+
+      - name: Limpiar resultados de ejecuciones anteriores
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          output = Path("importer/output")
+          for name in ("download-report.json", "prepared-imports.json"):
+              (output / name).unlink(missing_ok=True)
+          PY
+
+      - name: Descargar y validar boletines
+        run: python -u importer/download_bulletins.py
+
+      - name: Preparar archivos SQL
+        run: python -u importer/prepare_imports.py
+
+      - name: Importar en producción
+        if: ${{ inputs.import_production }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || {
+            echo "Falta el secreto CLOUDFLARE_API_TOKEN"
+            exit 1
+          }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || {
+            echo "Falta el secreto CLOUDFLARE_ACCOUNT_ID"
+            exit 1
+          }
+          python -u importer/apply_imports.py --production
+
+      - name: Guardar reportes de diagnóstico
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: reportes-cenada-${{ github.run_id }}
+          path: |
+            importer/output/download-report.json
+            importer/output/prepared-imports.json
+          if-no-files-found: ignore
+          retention-days: 7
