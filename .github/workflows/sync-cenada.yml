@@ -1,6 +1,10 @@
 name: Actualizar boletines CENADA
 
 on:
+  schedule:
+    # Todos los días a las 3:17 p. m. de Costa Rica (21:17 UTC).
+    - cron: "17 21 * * *"
+
   workflow_dispatch:
     inputs:
       import_production:
@@ -63,7 +67,7 @@ jobs:
         run: python -u importer/prepare_imports.py
 
       - name: Importar en producción
-        if: ${{ inputs.import_production }}
+        if: ${{ github.event_name == 'schedule' || inputs.import_production }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
